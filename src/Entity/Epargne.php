@@ -6,15 +6,19 @@ use App\Repository\EpargneRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: EpargneRepository::class)]
-class Epargne
+class Epargne extends Campagne
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $objectif = null;
 
-    public function getId(): ?int
+    public function getObjectif(): ?string
     {
-        return $this->id;
+        return $this->objectif;
+    }
+
+    public function setObjectif(?string $objectif): static
+    {
+        $this->objectif = $objectif;
+        return $this;
     }
 }
