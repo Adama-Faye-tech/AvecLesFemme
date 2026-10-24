@@ -6,15 +6,19 @@ use App\Repository\AdminRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: AdminRepository::class)]
-class Admin
+class Admin extends Membre
 {
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    private ?bool $droitsSuperAdmin = false;
 
-    public function getId(): ?int
+    public function getDroitsSuperAdmin(): ?bool
     {
-        return $this->id;
+        return $this->droitsSuperAdmin;
+    }
+
+    public function setDroitsSuperAdmin(bool $droitsSuperAdmin): static
+    {
+        $this->droitsSuperAdmin = $droitsSuperAdmin;
+        return $this;
     }
 }
