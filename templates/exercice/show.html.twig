@@ -1,0 +1,38 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Details de l'exercice{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Exercice #{{ exercice.id }}</h1>
+
+    <p><strong>Date de debut :</strong>
+        {{ exercice.debutAt ? exercice.debutAt|date('d/m/Y') : '-' }}
+    </p>
+    <p><strong>Date de fin :</strong>
+        {{ exercice.finAt ? exercice.finAt|date('d/m/Y') : '-' }}
+    </p>
+    <p><strong>Limite des prets :</strong>
+        {{ exercice.limitePretsAt ? exercice.limitePretsAt|date('d/m/Y') : '-' }}
+    </p>
+    <p><strong>Retribution :</strong>
+        {{ exercice.retributionAt ? exercice.retributionAt|date('d/m/Y') : '-' }}
+    </p>
+    <p><strong>Groupement :</strong>
+        {% if exercice.groupement %}
+            <a href="{{ path('app_groupement_show', {id: exercice.groupement.id}) }}">
+                {{ exercice.groupement.nom }}
+            </a>
+        {% else %}
+            Non defini
+        {% endif %}
+    </p>
+
+    <p>
+        Les campagnes ne sont pas encore reliees directement a Exercice
+        dans le modele Doctrine actuel.
+    </p>
+
+    <p><a href="{{ path('app_exercice') }}">Retour aux exercices</a></p>
+</div>
+{% endblock %}
