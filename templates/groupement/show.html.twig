@@ -1,0 +1,30 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Details du groupement{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ groupement.nom }}</h1>
+
+    <p><strong>Telephone :</strong> {{ groupement.tel ?? 'Non renseigne' }}</p>
+    <p><strong>Adresse :</strong> {{ groupement.adresse ?? 'Non renseignee' }}</p>
+
+    <h2>Exercices du groupement</h2>
+
+    {% if groupement.exercices is empty %}
+        <p>Aucun exercice pour ce groupement.</p>
+    {% else %}
+        <ul>
+        {% for exercice in groupement.exercices %}
+            <li>
+                Exercice #{{ exercice.id }}
+                â€” Debut : {{ exercice.debutAt ? exercice.debutAt|date('d/m/Y') : 'Non defini' }}
+                â€” <a href="{{ path('app_exercice_show', {id: exercice.id}) }}">Details</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p><a href="{{ path('app_groupement') }}">Retour aux groupements</a></p>
+</div>
+{% endblock %}
