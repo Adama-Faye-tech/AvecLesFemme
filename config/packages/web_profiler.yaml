@@ -3,9 +3,18 @@ when@dev:
         toolbar: true
 
     framework:
+<<<<<<< HEAD
         profiler: true
+=======
+        profiler:
+            collect_serializer_data: true
+>>>>>>> upstream/fixtures
 
 when@test:
     framework:
         profiler:
             collect: false
+<<<<<<< HEAD
+=======
+            collect_serializer_data: true
+>>>>>>> upstream/fixtures

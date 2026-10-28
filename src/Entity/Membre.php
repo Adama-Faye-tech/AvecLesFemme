@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\MembreRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+<<<<<<< HEAD
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\InheritanceType('JOINED')]
 #[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
 #[ORM\DiscriminatorMap(['membre' => Membre::class, 'admin' => Admin::class])]
+=======
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: MembreRepository::class)]
+>>>>>>> upstream/fixtures
 class Membre
 {
     #[ORM\Id]
@@ -19,6 +25,7 @@ class Membre
     #[ORM\Column]
     private ?int $id = null;
 
+<<<<<<< HEAD
     #[ORM\Column(length: 255)]
     private ?string $nomComplet = null;
 
@@ -39,6 +46,21 @@ class Membre
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt = null;
+=======
+    #[ORM\Column(length: 150)]
+    private ?string $nomComplet = null;
+
+    /**
+     * @var Collection<int, ModeCotisation>
+     */
+    #[ORM\OneToMany(targetEntity: ModeCotisation::class, mappedBy: 'membre')]
+    private Collection $modeCotisations;
+
+    public function __construct()
+    {
+        $this->modeCotisations = new ArrayCollection();
+    }
+>>>>>>> upstream/fixtures
 
     public function getId(): ?int
     {
@@ -53,6 +75,7 @@ class Membre
     public function setNomComplet(string $nomComplet): static
     {
         $this->nomComplet = $nomComplet;
+<<<<<<< HEAD
         return $this;
     }
 
@@ -122,3 +145,39 @@ class Membre
         return $this;
     }
 }
+=======
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, ModeCotisation>
+     */
+    public function getModeCotisations(): Collection
+    {
+        return $this->modeCotisations;
+    }
+
+    public function addModeCotisation(ModeCotisation $modeCotisation): static
+    {
+        if (!$this->modeCotisations->contains($modeCotisation)) {
+            $this->modeCotisations->add($modeCotisation);
+            $modeCotisation->setMembre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeModeCotisation(ModeCotisation $modeCotisation): static
+    {
+        if ($this->modeCotisations->removeElement($modeCotisation)) {
+            // set the owning side to null (unless already changed)
+            if ($modeCotisation->getMembre() === $this) {
+                $modeCotisation->setMembre(null);
+            }
+        }
+
+        return $this;
+    }
+}
+>>>>>>> upstream/fixtures

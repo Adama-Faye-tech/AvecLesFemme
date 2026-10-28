@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+<<<<<<< HEAD
 use App\Entity\Admin;
 use App\Entity\Campagne;
 use App\Entity\Epargne;
@@ -11,6 +12,8 @@ use App\Entity\ModeCotisation;
 use App\Entity\Role;
 use App\Entity\Seance;
 use App\Entity\Tontine;
+=======
+>>>>>>> upstream/fixtures
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 
@@ -18,6 +21,7 @@ class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+<<<<<<< HEAD
         
         $roleMembre = (new Role())->setNom('Membre');
         $roleTresorier = (new Role())->setNom('Trésorier');
@@ -83,3 +87,11 @@ class AppFixtures extends Fixture
         $manager->flush();
     }
 }
+=======
+        // $product = new Product();
+        // $manager->persist($product);
+
+        $manager->flush();
+    }
+}
+>>>>>>> upstream/fixtures

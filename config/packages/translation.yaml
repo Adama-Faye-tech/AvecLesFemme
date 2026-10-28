@@ -1,5 +1,9 @@
 framework:
+<<<<<<< HEAD
     default_locale: en
+=======
+    default_locale: fr
+>>>>>>> upstream/fixtures
     translator:
         default_path: '%kernel.project_dir%/translations'
         providers:
