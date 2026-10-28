@@ -3,25 +3,12 @@
 namespace App\Entity;
 
 use App\Repository\CampagneRepository;
-<<<<<<< HEAD
-=======
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
->>>>>>> upstream/fixtures
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CampagneRepository::class)]
-<<<<<<< HEAD
-#[ORM\InheritanceType('JOINED')]
-#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
-#[ORM\DiscriminatorMap([
-    'campagne' => Campagne::class,
-    'epargne'  => Epargne::class,
-    'tontine'  => Tontine::class,
-])]
-=======
->>>>>>> upstream/fixtures
 class Campagne
 {
     #[ORM\Id]
@@ -32,22 +19,6 @@ class Campagne
     #[ORM\Column(length: 100)]
     private ?string $nom = null;
 
-<<<<<<< HEAD
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $dateDebut = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $dateFin = null;
-
-    #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
-    private ?string $montant = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
-    private ?\DateTimeInterface $createdAt = null;
-
-    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    private ?\DateTimeInterface $updatedAt = null;
-=======
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTime $dateDebutAt = null;
 
@@ -77,7 +48,6 @@ class Campagne
     {
         $this->modeCotisations = new ArrayCollection();
     }
->>>>>>> upstream/fixtures
 
     public function getId(): ?int
     {
@@ -92,34 +62,6 @@ class Campagne
     public function setNom(string $nom): static
     {
         $this->nom = $nom;
-<<<<<<< HEAD
-        return $this;
-    }
-
-    public function getDateDebut(): ?\DateTimeInterface
-    {
-        return $this->dateDebut;
-    }
-
-    public function setDateDebut(\DateTimeInterface $dateDebut): static
-    {
-        $this->dateDebut = $dateDebut;
-        return $this;
-    }
-
-    public function getDateFin(): ?\DateTimeInterface
-    {
-        return $this->dateFin;
-    }
-
-    public function setDateFin(?\DateTimeInterface $dateFin): static
-    {
-        $this->dateFin = $dateFin;
-        return $this;
-    }
-
-    public function getMontant(): ?string
-=======
 
         return $this;
     }
@@ -149,41 +91,10 @@ class Campagne
     }
 
     public function getMontant(): ?int
->>>>>>> upstream/fixtures
     {
         return $this->montant;
     }
 
-<<<<<<< HEAD
-    public function setMontant(string $montant): static
-    {
-        $this->montant = $montant;
-        return $this;
-    }
-
-    public function getCreatedAt(): ?\DateTimeInterface
-    {
-        return $this->createdAt;
-    }
-
-    public function setCreatedAt(\DateTimeInterface $createdAt): static
-    {
-        $this->createdAt = $createdAt;
-        return $this;
-    }
-
-    public function getUpdatedAt(): ?\DateTimeInterface
-    {
-        return $this->updatedAt;
-    }
-
-    public function setUpdatedAt(?\DateTimeInterface $updatedAt): static
-    {
-        $this->updatedAt = $updatedAt;
-        return $this;
-    }
-}
-=======
     public function setMontant(int $montant): static
     {
         $this->montant = $montant;
@@ -257,4 +168,3 @@ class Campagne
         return $this;
     }
 }
->>>>>>> upstream/fixtures

@@ -13,8 +13,6 @@ class ModeCotisation
     #[ORM\Column]
     private ?int $id = null;
 
-<<<<<<< HEAD
-=======
     #[ORM\Column]
     private ?bool $isLibre = null;
 
@@ -26,13 +24,10 @@ class ModeCotisation
     #[ORM\JoinColumn(nullable: false)]
     private ?Membre $membre = null;
 
->>>>>>> upstream/fixtures
     public function getId(): ?int
     {
         return $this->id;
     }
-<<<<<<< HEAD
-=======
 
     public function isLibre(): ?bool
     {
@@ -69,5 +64,4 @@ class ModeCotisation
 
         return $this;
     }
->>>>>>> upstream/fixtures
 }

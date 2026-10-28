@@ -8,15 +8,4 @@ use Symfony\Component\HttpKernel\Kernel as BaseKernel;
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
-<<<<<<< HEAD
-
-    /**
-     * @return list<string> An array of allowed values for APP_ENV
-     */
-    private function getAllowedEnvs(): array
-    {
-        return ['prod', 'dev', 'test'];
-    }
-=======
->>>>>>> upstream/fixtures
 }
