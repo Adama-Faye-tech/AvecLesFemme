@@ -1,0 +1,41 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Liste des exercices{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Liste des exercices</h1>
+
+    {% if exercices is empty %}
+        <p>Aucun exercice enregistre.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Numero</th>
+                    <th>Debut</th>
+                    <th>Fin</th>
+                    <th>Groupement</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for exercice in exercices %}
+                <tr>
+                    <td>{{ exercice.id }}</td>
+                    <td>{{ exercice.debutAt ? exercice.debutAt|date('d/m/Y') : '-' }}</td>
+                    <td>{{ exercice.finAt ? exercice.finAt|date('d/m/Y') : '-' }}</td>
+                    <td>{{ exercice.groupement ? exercice.groupement.nom : '-' }}</td>
+                    <td>
+                        <a href="{{ path('app_exercice_show', {id: exercice.id}) }}">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+    <p><a href="{{ path('app_groupement') }}">Retour aux groupements</a></p>
+</div>
+{% endblock %}
