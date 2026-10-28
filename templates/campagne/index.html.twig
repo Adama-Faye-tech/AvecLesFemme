@@ -1,0 +1,44 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Liste des campagnes{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>Liste des campagnes</h1>
+
+    {% if campagnes is empty %}
+        <p>Aucune campagne enregistree.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Debut</th>
+                    <th>Fin</th>
+                    <th>Montant</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for campagne in campagnes %}
+                <tr>
+                    <td>{{ campagne.nom }}</td>
+                    <td>{{ campagne.dateDebutAt ? campagne.dateDebutAt|date('d/m/Y') : '-' }}</td>
+                    <td>{{ campagne.dateFinAt ? campagne.dateFinAt|date('d/m/Y') : '-' }}</td>
+                    <td>{{ campagne.montant }}</td>
+                    <td>{{ campagne.typeCampagne ? campagne.typeCampagne.nom : '-' }}</td>
+                    <td>
+                        <a href="{{ path('app_campagne_show', {id: campagne.id}) }}">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+
+    <p><a href="{{ path('app_groupement') }}">Retour aux groupements</a></p>
+</div>
+{% endblock %}
