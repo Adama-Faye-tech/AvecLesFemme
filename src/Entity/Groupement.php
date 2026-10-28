@@ -4,8 +4,6 @@ namespace App\Entity;
 
 use App\Repository\GroupementRepository;
 use App\Trait\DateTimeTrait;
-use DateTime;
-use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;

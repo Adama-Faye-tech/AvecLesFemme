@@ -11,23 +11,17 @@ class GroupementFixtures extends Fixture
     public function load(ObjectManager $manager): void
     {
         $data = [
-            ['GIE Teranga Mbour', '+221 77 123 45 67', 'Mbour, Thiès'],
-            ['GIE Jappo Dakar', '+221 78 234 56 78', 'Pikine, Dakar'],
-            ['GIE Dëgg Saint-Louis', '+221 76 345 67 89', 'Sor, Saint-Louis'],
+            ['nom' => 'GIE Teranga Mbour', 'tel' => '+221 77 123 45 67', 'adresse' => 'Mbour, Thiès'],
+            ['nom' => 'GIE Jappo Dakar', 'tel' => '+221 78 234 56 78', 'adresse' => 'Pikine, Dakar'],
+            ['nom' => 'GIE Dëgg Saint-Louis', 'tel' => '+221 76 345 67 89', 'adresse' => 'Sor, Saint-Louis'],
         ];
-        foreach ($data as $key => [$nom, $tel, $adresse]) {
-            // $nom = $groupement[0];
-            // $tel = $groupement[1];
-            // $adresse = $groupement[2];
+        foreach ($data as $groupementData) {
             $groupement = (new Groupement())
-                        ->setNom($nom)
-                        ->setTel($tel)
-                        ->setAdresse($adresse);
+                ->setNom($groupementData['nom'])
+                ->setTel($groupementData['tel'])
+                ->setAdresse($groupementData['adresse']);
             $manager->persist($groupement);
-            // $manager->flush();
         }
-        // $product = new Product();
-        // $manager->persist($product);
 
         $manager->flush();
     }
