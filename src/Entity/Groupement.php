@@ -23,7 +23,7 @@ class Groupement
     #[ORM\Column(length: 100)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 17)]
+    #[ORM\Column(length: 17, nullable: true)]
     private ?string $tel = null;
 
     #[ORM\Column(length: 255, nullable: true)]

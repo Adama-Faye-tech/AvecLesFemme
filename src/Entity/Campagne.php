@@ -9,6 +9,13 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: CampagneRepository::class)]
+#[ORM\InheritanceType('JOINED')]
+#[ORM\DiscriminatorColumn(name: 'type', type: 'string')]
+#[ORM\DiscriminatorMap([
+    'campagne' => Campagne::class,
+    'epargne' => Epargne::class,
+    'tontine' => Tontine::class,
+])]
 class Campagne
 {
     #[ORM\Id]
@@ -19,10 +26,10 @@ class Campagne
     #[ORM\Column(length: 100)]
     private ?string $nom = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTime $dateDebutAt = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTime $dateFinAt = null;
 
     #[ORM\Column]
