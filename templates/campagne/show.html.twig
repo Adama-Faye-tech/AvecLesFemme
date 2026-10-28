@@ -1,0 +1,37 @@
+﻿{% extends 'base.html.twig' %}
+
+{% block title %}Details de la campagne{% endblock %}
+
+{% block body %}
+<div class="container">
+    <h1>{{ campagne.nom }}</h1>
+
+    <p><strong>Type :</strong>
+        {{ campagne.typeCampagne ? campagne.typeCampagne.nom : '-' }}
+    </p>
+    <p><strong>Date de debut :</strong>
+        {{ campagne.dateDebutAt ? campagne.dateDebutAt|date('d/m/Y') : '-' }}
+    </p>
+    <p><strong>Date de fin :</strong>
+        {{ campagne.dateFinAt ? campagne.dateFinAt|date('d/m/Y') : '-' }}
+    </p>
+    <p><strong>Montant :</strong> {{ campagne.montant }}</p>
+    <p><strong>Modes de cotisation :</strong> {{ campagne.modeCotisations|length }}</p>
+
+    <h2>Modes de cotisation</h2>
+    {% if campagne.modeCotisations is empty %}
+        <p>Aucun mode de cotisation enregistre.</p>
+    {% else %}
+        <ul>
+        {% for mode in campagne.modeCotisations %}
+            <li>
+                Mode #{{ mode.id }} â€”
+                Libre : {{ mode.isLibre ? 'Oui' : 'Non' }}
+            </li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <p><a href="{{ path('app_campagne') }}">Retour aux campagnes</a></p>
+</div>
+{% endblock %}
