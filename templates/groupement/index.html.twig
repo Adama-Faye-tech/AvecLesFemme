@@ -1,88 +1,41 @@
-{% extends 'base.html.twig' %}
+﻿{% extends 'base.html.twig' %}
 
-{% block title %}Groupements - Avec les femmes{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:wght@600;700&display=swap" rel="stylesheet">
-{% endblock %}
+{% block title %}Liste des groupements{% endblock %}
 
 {% block body %}
-    <header class="entete">
-        <div class="entete__barre">
-            <a class="marque" href="{{ path('app_home') }}">Avec les femmes</a>
-            <nav aria-label="Navigation principale">
-                <ul class="nav">
-                    <li><a href="{{ path('app_home') }}" aria-current="page">Groupements</a></li>
-                </ul>
-            </nav>
-        </div>
-        <div class="tissage"></div>
-    </header>
+<div class="container">
+    <h1>Liste des groupements</h1>
 
-    <main class="contenu">
-        <div class="tete-page">
-            <div>
-                <h1>Groupements</h1>
-                <p class="sous-titre">
-                    {{ dataGroupements|length }}
-                    {{ dataGroupements|length == 1 ? 'groupement suivi' : 'groupements suivis' }}
-                </p>
-            </div>
-        </div>
+    {% if groupements is empty %}
+        <p>Aucun groupement enregistre.</p>
+    {% else %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Telephone</th>
+                    <th>Adresse</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for groupement in groupements %}
+                <tr>
+                    <td>{{ groupement.nom }}</td>
+                    <td>{{ groupement.tel ?? 'Non renseigne' }}</td>
+                    <td>{{ groupement.adresse ?? 'Non renseignee' }}</td>
+                    <td>
+                        <a href="{{ path('app_groupement_show', {id: groupement.id}) }}">
+                            Details
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
 
-        <section class="panneau" aria-labelledby="titre-liste">
-            <h2 id="titre-liste">Liste des groupements</h2>
-
-            {% if dataGroupements is empty %}
-                <div class="vide">
-                    <p>Aucun groupement n’est enregistré pour le moment.</p>
-                </div>
-            {% else %}
-                <div class="defilement">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th scope="col">Groupement</th>
-                                <th scope="col">Téléphone</th>
-                                <th scope="col">Exercice en cours</th>
-                                <th scope="col" class="nombre">Nombre d’exercices</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% for groupement in dataGroupements %}
-                                {% set exerciceEnCours = groupement.exercices|first %}
-                                <tr>
-                                    <td>
-                                        <span class="nom-groupement">{{ groupement.nom }}</span>
-                                        {% if groupement.adresse %}
-                                            <span class="discret">{{ groupement.adresse }}</span>
-                                        {% endif %}
-                                    </td>
-                                    <td>{{ groupement.tel ?? 'Non renseigné' }}</td>
-                                    <td>
-                                        {% if exerciceEnCours %}
-                                            <span class="statut statut--{{ exerciceEnCours.statut.value }}">
-                                                {{ exerciceEnCours.statut.label }}
-                                            </span>
-                                            {% if exerciceEnCours.debutAt %}
-                                                <span class="discret">
-                                                    Depuis le {{ exerciceEnCours.debutAt|format_date('long') }}
-                                                </span>
-                                            {% endif %}
-                                        {% else %}
-                                            <span class="discret">Aucun exercice</span>
-                                        {% endif %}
-                                    </td>
-                                    <td class="nombre">{{ groupement.exercices|length }}</td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-            {% endif %}
-        </section>
-    </main>
+    <p><a href="{{ path('app_exercice') }}">Voir tous les exercices</a></p>
+    <p><a href="{{ path('app_campagne') }}">Voir toutes les campagnes</a></p>
+</div>
 {% endblock %}
